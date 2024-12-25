@@ -110,3 +110,37 @@ export const getInstagramPosts = async (username: string): Promise<InstagramPost
     throw error;
   }
 }; 
+
+export const getInstagramStories = async (username: string) => {
+  try {
+    const response = await fetch(`https://instagram-scraper-api2.p.rapidapi.com/v1/stories?username_or_id_or_url=${username}`, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
+        'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a',
+      },
+    });
+    console.log({response});
+    if (!response.ok) {
+      throw new Error(`Failed to fetch stories: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching stories:', error);
+    throw error;
+  }
+}; 
+
+export const getInstagramHighlights = async (username: string) => {
+  const response = await fetch(
+    `https://instagram-scraper-api2.p.rapidapi.com/v1/highlights?username_or_id_or_url=${username}`,
+    {
+      headers: {
+        'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
+        'x-rapidapi-key': 'YOUR_API_KEY_HERE'
+      }
+    }
+  );
+  return response.json();
+}; 
