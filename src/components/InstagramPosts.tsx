@@ -1,91 +1,138 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Spin, Avatar } from 'antd';
-import { PlayCircleOutlined, HeartOutlined, MessageOutlined } from '@ant-design/icons';
-import { InstagramPost } from '../types/instagram.types';
-import { getInstagramPosts } from '../services/instagramService';
-import './InstagramPosts.css';
+import { Row, Col, Modal, Spin } from 'antd';
+import { PlayCircleOutlined } from '@ant-design/icons';
+import { convertImageToBase64 } from '../utils/imageUtils';
 
-const InstagramPosts: React.FC<{ username: string }> = ({ username }) => {
-  const [posts, setPosts] = useState<InstagramPost[]>([]);
+interface PostItem {
+  id: string;
+  media_type: number;
+  thumbnail_url?: string;
+  video_versions?: Array<{
+    url: string;
+    width: number;
+    height: number;
+  }>;
+  image_versions: {
+    items: Array<{
+      url: string;
+      width: number;
+      height: number;
+    }>;
+  };
+  base64Image?: string;
+}
+
+const InstagramPosts: React.FC<{ posts: PostItem[] }> = ({ posts }) => {
+  const [processedPosts, setProcessedPosts] = useState<PostItem[]>([]);
+  const [selectedPost, setSelectedPost] = useState<PostItem | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const processPosts = async () => {
       try {
         setLoading(true);
-        const response = await getInstagramPosts(username);
-        setPosts(response.data.items);
-      } catch (err) {
-        setError('Failed to fetch Instagram posts');
-        console.error(err);
+        const postsWithBase64 = await Promise.all(
+          posts.map(async (post) => {
+            const imageUrl = post.thumbnail_url || post.image_versions.items[0]?.url;
+            if (imageUrl) {
+              try {
+                const base64Image = await convertImageToBase64(imageUrl);
+                return { ...post, base64Image };
+              } catch (err) {
+                console.error('Error converting post image:', err);
+                return post;
+              }
+            }
+            return post;
+          })
+        );
+        setProcessedPosts(postsWithBase64);
+      } catch (error) {
+        console.error('Error processing posts:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (username) {
-      fetchPosts();
-    }
-  }, [username]);
+    processPosts();
+  }, [posts]);
 
-  if (loading) return <Spin size="large" className="posts-loader" />;
-  if (error) return <div className="error-message">{error}</div>;
+  const handlePostClick = (post: PostItem) => {
+    setSelectedPost(post);
+  };
+
+  const handleModalClose = () => {
+    setSelectedPost(null);
+  };
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
-    <Row gutter={[16, 16]} className="posts-grid">
-      {posts.map((post) => (
-        <Col xs={24} sm={12} md={8} lg={6} key={post.id}>
-          <Card 
-            hoverable 
-            className="post-card"
-            cover={
-              <div className="post-media">
-                {post.media_type === 2 ? ( // Video
-                  <>
-                    <img 
-                      alt={post.caption?.text || 'Instagram post'} 
-                      src={post.thumbnail_url} 
-                    />
-                    <PlayCircleOutlined className="play-icon" />
-                  </>
-                ) : ( // Image
+    <div className="posts-container">
+      <Row gutter={[8, 8]}>
+        {processedPosts.map((post) => (
+          <Col span={8} key={post.id}>
+            <div 
+              className="post-item" 
+              onClick={() => handlePostClick(post)}
+            >
+              {post.base64Image && (
+                <>
                   <img 
-                    alt={post.caption?.text || 'Instagram post'} 
-                    src={post.image_versions?.items[0]?.url || post.thumbnail_url} 
+                    src={post.base64Image}
+                    alt="Post"
+                    className="post-thumbnail"
                   />
-                )}
-              </div>
-            }
-          >
-            <div className="post-info">
-              <div className="post-header">
-                <Avatar src={post.caption?.user?.profile_pic_url} size="small" />
-                <span className="username">{post.caption?.user?.username}</span>
-              </div>
-              <div className="post-stats">
-                <span>
-                  <HeartOutlined /> {post.like_count.toLocaleString()}
-                </span>
-                <span>
-                  <MessageOutlined /> {post.comment_count.toLocaleString()}
-                </span>
-                {post.play_count && (
-                  <span>
-                    <PlayCircleOutlined /> {post.play_count.toLocaleString()}
-                  </span>
-                )}
-              </div>
-              <div className="post-caption">
-                {post.caption?.text.length > 100 
-                  ? `${post.caption.text.substring(0, 100)}...` 
-                  : post.caption?.text}
-              </div>
+                  {post.media_type === 2 && (
+                    <PlayCircleOutlined className="video-indicator" />
+                  )}
+                </>
+              )}
             </div>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+          </Col>
+        ))}
+      </Row>
+
+      <Modal
+        open={selectedPost !== null}
+        onCancel={handleModalClose}
+        footer={null}
+        width={800}
+        centered
+        className="post-modal"
+      >
+        {selectedPost && (
+          <div className="modal-content">
+            {selectedPost.media_type === 2 ? (
+              <div className="video-wrapper">
+                <video
+                  key={selectedPost.id}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="modal-video"
+                  src={selectedPost.video_versions?.[0]?.url}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            ) : (
+              <img
+                src={selectedPost.base64Image}
+                alt="Post"
+                className="modal-image"
+              />
+            )}
+          </div>
+        )}
+      </Modal>
+    </div>
   );
 };
 

@@ -1,30 +1,16 @@
-.posts-grid {
-  padding: 24px;
+.posts-container {
+  padding: 16px;
 }
 
-.posts-loader {
-  display: flex;
-  justify-content: center;
-  margin: 48px 0;
-}
-
-.error-message {
-  text-align: center;
-  color: #ff4d4f;
-  margin: 48px 0;
-}
-
-.post-card {
-  margin-bottom: 16px;
-}
-
-.post-media {
+.post-item {
   position: relative;
+  width: 100%;
   padding-top: 100%; /* 1:1 Aspect Ratio */
-  background: #f0f0f0;
+  cursor: pointer;
+  overflow: hidden;
 }
 
-.post-media img {
+.post-thumbnail {
   position: absolute;
   top: 0;
   left: 0;
@@ -33,46 +19,48 @@
   object-fit: cover;
 }
 
-.play-icon {
+.video-indicator {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 48px;
+  font-size: 24px;
   color: white;
-  opacity: 0.8;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-.post-info {
-  padding: 12px 0;
+.post-modal {
+  max-width: 90vw !important;
 }
 
-.post-header {
+.modal-content {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
 }
 
-.username {
-  margin-left: 8px;
-  font-weight: 500;
+.modal-video {
+  max-width: 100%;
+  max-height: 80vh;
 }
 
-.post-stats {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 12px;
-  color: #666;
+.modal-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
 }
 
-.post-stats span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+/* Hover effect */
+.post-item:hover {
+  opacity: 0.9;
 }
 
-.post-caption {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.4;
+/* Modal customization */
+.post-modal .ant-modal-content {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.post-modal .ant-modal-close {
+  color: white;
 } 

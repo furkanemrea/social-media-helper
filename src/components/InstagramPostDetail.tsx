@@ -19,34 +19,63 @@ interface Props {
 const InstagramPostDetail: React.FC<Props> = ({ post, visible, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [carouselImages, setCarouselImages] = useState<string[]>([]);
+  const [carouselVideos, setCarouselVideos] = useState<string[]>([]);
 
   useEffect(() => {
-    const loadCarouselImages = async () => {
+    console.log({post});
+    const loadCarouselMedia = async () => {
       if (!post || !visible) return;
 
       try {
         setLoading(true);
-        const imageUrls = post.carouselBase64Images?.map(media => 
+        const mediaUrls = post.carouselBase64Images?.map(media => 
           media || ''
         ).filter(Boolean) || [];
-        
-        if (imageUrls.length === 0 && post.base64Image) {
-          setCarouselImages([post.base64Image]);
+
+        // Handle single media post
+        if (mediaUrls.length === 0) {
+          if (post.video_url) {
+            setCarouselVideos([post.video_url]);
+            setCarouselImages([]);
+          } else if (post.base64Image) {
+            setCarouselImages([post.base64Image]);
+            setCarouselVideos([]);
+          }
           return;
         }
 
-        const base64Images = await Promise.all(
-          imageUrls.map(url => convertImageToBase64(url))
+        // Handle carousel media
+        const processedMedia = await Promise.all(
+          mediaUrls.map(async (url) => {
+            if (url.includes('video_url:')) {
+              // If the URL indicates it's a video
+              return { type: 'video', url: url.replace('video_url:', '') };
+            } else {
+              // If it's an image, convert to base64
+              const base64 = await convertImageToBase64(url);
+              return { type: 'image', url: base64 };
+            }
+          })
         );
-        setCarouselImages(base64Images);
+
+        const images = processedMedia
+          .filter(media => media.type === 'image')
+          .map(media => media.url);
+        
+        const videos = processedMedia
+          .filter(media => media.type === 'video')
+          .map(media => media.url);
+
+        setCarouselImages(images);
+        setCarouselVideos(videos);
       } catch (error) {
-        console.error('Error loading carousel images:', error);
+        console.error('Error loading carousel media:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadCarouselImages();
+    loadCarouselMedia();
   }, [post, visible]);
 
   if (!post) return null;
@@ -63,13 +92,25 @@ const InstagramPostDetail: React.FC<Props> = ({ post, visible, onClose }) => {
       <div className="post-detail-container">
         <div className="post-detail-media">
           <Carousel
-            dots={carouselImages.length > 1}
-            arrows={carouselImages.length > 1}
+            dots={carouselImages.length + carouselVideos.length > 1}
+            arrows={carouselImages.length + carouselVideos.length > 1}
             prevArrow={<LeftOutlined />}
             nextArrow={<RightOutlined />}
           >
+            {carouselVideos.map((videoUrl, index) => (
+              <div key={`video-${index}`} className="carousel-item">
+                <video
+                  controls
+                  playsInline
+                  src={videoUrl}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            ))}
             {carouselImages.map((base64, index) => (
-              <div key={index} className="carousel-item">
+              <div key={`image-${index}`} className="carousel-item">
                 <img src={base64} alt={`Post ${index + 1}`} />
               </div>
             ))}

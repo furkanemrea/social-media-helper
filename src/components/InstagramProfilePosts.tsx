@@ -6,6 +6,7 @@ import { getInstagramPosts } from '../services/instagramService';
 import { convertImageToBase64 } from '../utils/imageUtils';
 import InstagramPostDetail from './InstagramPostDetail';
 import './InstagramProfilePosts.css';
+import InstagramHighlights from './InstagramHighlights';
 
 interface PostWithBase64 extends InstagramPost {
   base64Image?: string;
@@ -142,7 +143,7 @@ const InstagramProfilePosts: React.FC<{ username: string }> = ({ username }) => 
           }
           key="highlights"
         >
-          <Empty description="No highlights available" />
+          <InstagramHighlights username={username} />
         </TabPane>
 
         <TabPane

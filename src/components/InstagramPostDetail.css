@@ -65,13 +65,16 @@
   flex: 1;
   padding: 20px;
   background: white;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .post-detail-header {
   display: flex;
   align-items: center;
   margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .user-avatar {
@@ -88,15 +91,45 @@
 .post-detail-caption {
   margin-bottom: 16px;
   line-height: 1.5;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 8px;
+}
+
+.post-detail-caption::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post-detail-caption::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.post-detail-caption::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.post-detail-caption::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .post-detail-stats {
   display: flex;
   gap: 16px;
   margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .post-detail-date {
   color: #8e8e8e;
   font-size: 12px;
+  flex-shrink: 0;
+}
+
+.carousel-item video {
+  max-height: 80vh;
+  margin: 0 auto;
+  display: block;
+  background-color: black;
 } 

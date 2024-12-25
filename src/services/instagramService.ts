@@ -133,14 +133,70 @@ export const getInstagramStories = async (username: string) => {
 }; 
 
 export const getInstagramHighlights = async (username: string) => {
-  const response = await fetch(
-    `https://instagram-scraper-api2.p.rapidapi.com/v1/highlights?username_or_id_or_url=${username}`,
-    {
-      headers: {
-        'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
-        'x-rapidapi-key': 'YOUR_API_KEY_HERE'
+  try {
+    const response = await fetch(
+      `https://instagram-scraper-api2.p.rapidapi.com/v1/highlights?username_or_id_or_url=${username}`,
+      {
+        headers: {
+          'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
+          'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a'
+        }
       }
+    );
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch highlights: ${response.statusText}`);
     }
-  );
-  return response.json();
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching highlights:', error);
+    throw error;
+  }
+};
+
+export const getInstagramHighlightStories = async (highlightId: string) => {
+  try {
+    const response = await fetch(
+      `https://instagram-scraper-api2.p.rapidapi.com/v1/highlight/stories?highlight_id=${highlightId}`,
+      {
+        headers: {
+          'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
+          'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a'
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch highlight stories: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching highlight stories:', error);
+    throw error;
+  }
+}; 
+
+export const getHighlightInfo = async (highlightId: string) => {
+  try {
+    const response = await fetch(
+      `https://instagram-scraper-api2.p.rapidapi.com/v1/highlight_info?highlight_id=${highlightId}`,
+      {
+        headers: {
+          'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
+          'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a'
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch highlight info: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching highlight info:', error);
+    throw error;
+  }
 }; 
