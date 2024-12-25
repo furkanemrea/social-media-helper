@@ -1,0 +1,120 @@
+.instagram-finder {
+  padding: 24px;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+.search-container {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.result-container {
+  margin-top: 24px;
+}
+
+.instagram-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.profile-info {
+  margin-left: 24px;
+}
+
+.profile-info h4 {
+  margin-bottom: 4px;
+}
+
+.stats-container {
+  padding: 16px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.bio-container {
+  margin-top: 16px;
+  padding: 8px 0;
+}
+
+/* Ant Design customization */
+.ant-statistic-title {
+  font-size: 14px;
+  color: #8e8e8e;
+}
+
+.ant-statistic-content {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ant-input-search {
+  max-width: 100%;
+}
+
+.ant-card {
+  border-radius: 8px;
+}
+
+.ant-avatar {
+  border: 3px solid #f0f0f0;
+}
+
+.content-tabs {
+  margin-top: 24px;
+}
+
+.ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+.ant-tabs-tab {
+  padding: 12px 16px !important;
+}
+
+.ant-tabs-tab .anticon {
+  margin-right: 8px;
+}
+
+.ant-tabs-content {
+  min-height: 300px;
+  padding: 16px;
+}
+
+/* Adjust stats container for 4 columns */
+.stats-container .ant-col {
+  text-align: center;
+}
+
+.stats-container .ant-statistic {
+  padding: 0 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .ant-tabs-tab {
+    padding: 8px 12px !important;
+  }
+  
+  .ant-tabs-tab .anticon {
+    margin-right: 4px;
+  }
+  
+  .stats-container .ant-statistic-title {
+    font-size: 12px;
+  }
+  
+  .stats-container .ant-statistic-content {
+    font-size: 14px;
+  }
+} 
