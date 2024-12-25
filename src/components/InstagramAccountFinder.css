@@ -1,120 +1,130 @@
 .instagram-finder {
   padding: 24px;
-  background-color: #fafafa;
-  min-height: 100vh;
 }
 
 .search-container {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+}
+
+.error-message {
+  color: #ff4d4f;
   text-align: center;
+  margin: 16px 0;
 }
 
-.result-container {
-  margin-top: 24px;
-}
-
-.instagram-card {
-  background: white;
+.profile-card {
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  max-width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header {
   display: flex;
-  align-items: center;
+  gap: 32px;
   margin-bottom: 24px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
 }
 
 .profile-info {
-  margin-left: 24px;
+  flex-grow: 1;
 }
 
-.profile-info h4 {
-  margin-bottom: 4px;
+.profile-username {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-.stats-container {
-  padding: 16px 0;
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
-  text-align: center;
+.profile-username h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 300;
 }
 
-.bio-container {
-  margin-top: 16px;
-  padding: 8px 0;
+.verified-badge {
+  color: #3897f0;
+  font-size: 18px;
 }
 
-/* Ant Design customization */
-.ant-statistic-title {
-  font-size: 14px;
-  color: #8e8e8e;
-}
-
-.ant-statistic-content {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.ant-input-search {
-  max-width: 100%;
-}
-
-.ant-card {
-  border-radius: 8px;
-}
-
-.ant-avatar {
-  border: 3px solid #f0f0f0;
-}
-
-.content-tabs {
-  margin-top: 24px;
-}
-
-.ant-tabs-nav {
+.profile-stats {
+  display: flex;
+  gap: 40px;
   margin-bottom: 24px;
 }
 
-.ant-tabs-tab {
-  padding: 12px 16px !important;
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.ant-tabs-tab .anticon {
-  margin-right: 8px;
+.stat-value {
+  font-weight: 600;
+  font-size: 16px;
 }
 
-.ant-tabs-content {
-  min-height: 300px;
-  padding: 16px;
+.stat-label {
+  color: #8e8e8e;
+  font-size: 14px;
 }
 
-/* Adjust stats container for 4 columns */
-.stats-container .ant-col {
-  text-align: center;
+.profile-bio {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #dbdbdb;
 }
 
-.stats-container .ant-statistic {
-  padding: 0 8px;
+.bio-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 576px) {
-  .ant-tabs-tab {
-    padding: 8px 12px !important;
+.bio-category {
+  color: #8e8e8e;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.bio-text {
+  white-space: pre-wrap;
+  margin-bottom: 12px;
+}
+
+.bio-text p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #00376b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bio-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
   }
-  
-  .ant-tabs-tab .anticon {
-    margin-right: 4px;
+
+  .profile-stats {
+    justify-content: center;
   }
-  
-  .stats-container .ant-statistic-title {
-    font-size: 12px;
-  }
-  
-  .stats-container .ant-statistic-content {
-    font-size: 14px;
+
+  .profile-bio {
+    text-align: center;
   }
 } 
