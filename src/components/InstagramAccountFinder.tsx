@@ -5,12 +5,14 @@ import { InstagramAccount } from '../types/instagram.types';
 import { fetchInstagramAccount } from '../services/instagramService';
 import InstagramProfilePosts from './InstagramProfilePosts';
 import './InstagramAccountFinder.css';
+import { convertImageToBase64 } from '../utils/imageUtils';
 
 const InstagramAccountFinder = () => {
   const [username, setUsername] = useState('');
   const [account, setAccount] = useState<InstagramAccount | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [base64Image, setBase64Image] = useState(null);
 
   const handleSearch = async () => {
     if (!username.trim()) return;
@@ -20,6 +22,7 @@ const InstagramAccountFinder = () => {
       setError(null);
       const data = await fetchInstagramAccount(username);
       setAccount(data);
+      getImageUrl(data?.profile_pic_url_hd || data?.profile_pic_url);
     } catch (err) {
       setError('Account not found');
       setAccount(null);
@@ -27,6 +30,11 @@ const InstagramAccountFinder = () => {
       setLoading(false);
     }
   };
+
+  const getImageUrl =  async (url: string) => {
+      const data = await convertImageToBase64(url);
+      setBase64Image(data);
+  }
 
   return (
     <div className="instagram-finder">
@@ -58,7 +66,7 @@ const InstagramAccountFinder = () => {
               <div className="profile-header">
                 <Avatar 
                   size={150} 
-                  src={account.profile_pic_url_hd || account.profile_pic_url}
+                  src={base64Image}
                   className="profile-avatar"
                 />
                 <div className="profile-info">

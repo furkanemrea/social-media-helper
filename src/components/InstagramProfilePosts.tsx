@@ -24,7 +24,6 @@ const InstagramProfilePosts: React.FC<{ username: string }> = ({ username }) => 
           if (!imageUrl) return { ...post };
 
           const base64Image = await convertImageToBase64(imageUrl);
-          console.log({base64Image});
           return { ...post, base64Image };
         } catch (error) {
           console.error('Error converting image to base64:', error);
