@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Input, Row, Col, Card as AntCard, Avatar, Button } from 'antd';
-import { SearchOutlined, LinkOutlined } from '@ant-design/icons';
-import { InstagramAccount } from '../types/instagram.types';
+import { Input, Card as AntCard, Spin, Row, Col, Button, Avatar, Alert } from 'antd';
+import { SearchOutlined, InstagramOutlined, LinkOutlined, LockOutlined } from '@ant-design/icons';
 import { fetchInstagramAccount } from '../services/instagramService';
-import InstagramProfilePosts from './InstagramProfilePosts';
-import './InstagramAccountFinder.css';
 import { convertImageToBase64 } from '../utils/imageUtils';
+import InstagramPosts from './InstagramPosts';
+import InstagramHighlights from './InstagramHighlights';
+import './InstagramAccountFinder.css';
+import { InstagramAccount } from '../types/instagram.types';
+import InstagramProfilePosts from './InstagramProfilePosts';
 
 const InstagramAccountFinder = () => {
   const [username, setUsername] = useState('');
@@ -16,6 +18,11 @@ const InstagramAccountFinder = () => {
 
   const handleSearch = async () => {
     if (!username.trim()) return;
+
+    setAccount(null);
+    setBase64Image('');
+    setError('');
+    setLoading(true);
 
     try {
       setLoading(true);
@@ -38,18 +45,41 @@ const InstagramAccountFinder = () => {
 
   return (
     <div className="instagram-finder">
-      <Row justify="center" className="search-container">
-        <Col xs={24} sm={20} md={16} lg={12}>
-          <Input
-            size="large"
-            placeholder="Enter Instagram username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            onPressEnter={handleSearch}
-            prefix={<SearchOutlined />}
-          />
-        </Col>
-      </Row>
+      <div className="search-container">
+        <div className="search-header">
+          <InstagramOutlined className="instagram-icon" />
+          <h1 className="search-title">Instagram Profile Viewer</h1>
+          <p className="search-description">
+            Enter any Instagram username to view their public profile anonymously
+          </p>
+        </div>
+        <div className="search-box">
+          <label className="search-label">
+            Search Instagram Account
+          </label>
+          <div className="search-input-group">
+            <Input
+              prefix={<SearchOutlined className="search-icon" />}
+              placeholder="Enter Instagram username..."
+              size="large"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              onPressEnter={handleSearch}
+              className="search-input"
+              allowClear
+            />
+            <Button 
+              type="primary" 
+              size="large" 
+              onClick={handleSearch}
+              className="search-button"
+              icon={<SearchOutlined />}
+            >
+              Search
+            </Button>
+          </div>
+        </div>
+      </div>
 
       {error && (
         <Row justify="center">
@@ -59,7 +89,7 @@ const InstagramAccountFinder = () => {
         </Row>
       )}
 
-      {account && (
+      {account && !loading && (
         <Row justify="center">
           <Col xs={24} sm={20} md={16} lg={12}>
             <AntCard className="profile-card">
@@ -119,6 +149,27 @@ const InstagramAccountFinder = () => {
 
               <InstagramProfilePosts username={account.username} />
             </AntCard>
+
+              <div className="private-account-message">
+                <Alert
+                  message="Private Account"
+                  description={
+                    <div className="private-account-content">
+                      <LockOutlined className="lock-icon" />
+                      <p>This account is private. Only approved followers can see their photos and videos.</p>
+                    </div>
+                  }
+                  type="info"
+                  showIcon={false}
+                />
+              </div>
+            
+             { account.username && (
+                <>
+                  <InstagramProfilePosts username={account.username} />
+                  <InstagramHighlights username={account.username} />
+                </>
+              )}
           </Col>
         </Row>
       )}

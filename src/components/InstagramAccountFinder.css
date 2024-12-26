@@ -169,4 +169,52 @@
   .profile-stats {
     padding: 1rem;
   }
+}
+
+/* Add these styles to your existing CSS */
+
+.private-account-message {
+  margin: 2rem 0;
+}
+
+.private-account-message .ant-alert {
+  border-radius: 12px;
+  padding: 24px;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.private-account-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.private-account-content .lock-icon {
+  font-size: 24px;
+  color: #405de6;
+}
+
+.private-account-content p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+@media (max-width: 576px) {
+  .private-account-message {
+    margin: 1rem 0;
+  }
+
+  .private-account-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .private-account-content p {
+    font-size: 1rem;
+  }
 } 
