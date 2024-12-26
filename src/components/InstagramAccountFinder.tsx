@@ -146,11 +146,14 @@ const InstagramAccountFinder = () => {
                   </a>
                 )}
               </div>
-
-              <InstagramProfilePosts username={account.username} />
             </AntCard>
 
-              <div className="private-account-message">
+             { account.username ? (
+                <>
+                  <InstagramProfilePosts username={account.username} />
+                </>
+              ) : (
+                <div className="private-account-message">
                 <Alert
                   message="Private Account"
                   description={
@@ -163,12 +166,6 @@ const InstagramAccountFinder = () => {
                   showIcon={false}
                 />
               </div>
-            
-             { account.username && (
-                <>
-                  <InstagramProfilePosts username={account.username} />
-                  <InstagramHighlights username={account.username} />
-                </>
               )}
           </Col>
         </Row>

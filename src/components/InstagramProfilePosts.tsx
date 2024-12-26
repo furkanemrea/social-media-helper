@@ -145,18 +145,6 @@ const InstagramProfilePosts: React.FC<{ username: string }> = ({ username }) => 
         >
           <InstagramHighlights username={username} />
         </TabPane>
-
-        <TabPane
-          tab={
-            <span>
-              <PlaySquareOutlined />
-              REELS
-            </span>
-          }
-          key="reels"
-        >
-          <Empty description="No reels available" />
-        </TabPane>
       </Tabs>
 
       <InstagramPostDetail
