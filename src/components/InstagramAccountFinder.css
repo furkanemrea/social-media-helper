@@ -1,143 +1,172 @@
 .instagram-finder {
-  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ef 100%);
+  padding: 2rem;
 }
 
 .search-container {
-  margin-bottom: 24px;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  text-align: center;
 }
 
-.error-message {
-  color: #ff4d4f;
-  text-align: center;
-  margin: 16px 0;
+.search-title {
+  font-size: 2rem;
+  color: #262626;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.search-description {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.search-input {
+  margin-bottom: 1rem;
+}
+
+.search-input .ant-input-affix-wrapper {
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e8e8e8;
+  background: white;
+}
+
+.search-input .ant-input {
+  font-size: 1.1rem;
 }
 
 .profile-card {
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .profile-header {
-  display: flex;
-  gap: 32px;
-  margin-bottom: 24px;
+  padding: 2rem;
+  background: linear-gradient(45deg, #f8f9fa, #ffffff);
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .profile-avatar {
-  flex-shrink: 0;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.profile-info {
-  flex-grow: 1;
+.profile-username-container {
+  margin: 1.5rem 0;
 }
 
-.profile-username {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.profile-username h2 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 300;
+.profile-username-container h2 {
+  color: #262626;
+  font-weight: 600;
 }
 
 .verified-badge {
-  color: #3897f0;
-  font-size: 18px;
+  background: linear-gradient(45deg, #405de6, #5851db);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-left: 8px;
 }
 
 .profile-stats {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
+  background: linear-gradient(45deg, #f8f9fa, #ffffff);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  flex: 1;
-  padding: 0 8px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
 }
 
 .stat-value {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #262626;
-  display: block;
-  width: 100%;
-  text-align: center;
 }
 
 .stat-label {
-  font-size: 14px;
   color: #8e8e8e;
-  margin-top: 4px;
-  display: block;
-  width: 100%;
-  text-align: center;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .profile-bio {
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #dbdbdb;
+  padding: 1.5rem;
+  background: linear-gradient(45deg, #ffffff, #f8f9fa);
+  border-radius: 16px;
+  margin: 1rem 0;
+  line-height: 1.6;
+  color: #262626;
 }
 
-.bio-name {
+.profile-sections {
+  padding: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: #262626;
+  margin-bottom: 1rem;
   font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.bio-category {
-  color: #8e8e8e;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.bio-text {
-  white-space: pre-wrap;
-  margin-bottom: 12px;
-}
-
-.bio-text p {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.bio-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 4px;
-  color: #00376b;
-  font-weight: 600;
-  text-decoration: none;
+  gap: 8px;
 }
 
-.bio-link:hover {
-  text-decoration: underline;
+.section-title .anticon {
+  color: #405de6;
 }
 
+/* Loading state */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Error state */
+.error-message {
+  text-align: center;
+  color: #ff4d4f;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 77, 79, 0.1);
+  margin: 1rem 0;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 768px) {
+  .instagram-finder {
+    padding: 1rem;
+  }
+
+  .search-title {
+    font-size: 1.5rem;
+  }
+
   .profile-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 24px;
+    padding: 1rem;
   }
 
   .profile-stats {
-    justify-content: center;
-  }
-
-  .profile-bio {
-    text-align: center;
+    padding: 1rem;
   }
 } 
