@@ -51,24 +51,37 @@
 
 .profile-stats {
   display: flex;
-  gap: 40px;
-  margin-bottom: 24px;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  flex: 1;
+  padding: 0 8px;
 }
 
 .stat-value {
+  font-size: 18px;
   font-weight: 600;
-  font-size: 16px;
+  color: #262626;
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .stat-label {
-  color: #8e8e8e;
   font-size: 14px;
+  color: #8e8e8e;
+  margin-top: 4px;
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .profile-bio {

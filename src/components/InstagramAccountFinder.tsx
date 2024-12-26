@@ -70,7 +70,7 @@ const InstagramAccountFinder = () => {
                   className="profile-avatar"
                 />
                 <div className="profile-info">
-                  <div className="profile-username">
+                  <div className="profile-username-container">
                     <h2>{account.username}</h2>
                     {account.isVerified && (
                       <span className="verified-badge">✓</span>
@@ -78,16 +78,16 @@ const InstagramAccountFinder = () => {
                   </div>
                   <div className="profile-stats">
                     <div className="stat-item">
-                      <span className="stat-value">{account.posts || 0}</span>
-                      <span className="stat-label">posts</span>
+                      <div className="stat-value">{account.posts || 0}</div>
+                      <div className="stat-label">posts</div>
                     </div>
                     <div className="stat-item">
-                      <span className="stat-value">{account.followers || 0}</span>
-                      <span className="stat-label">followers</span>
+                      <div className="stat-value">{account.followers || 0}</div>
+                      <div className="stat-label">followers</div>
                     </div>
                     <div className="stat-item">
-                      <span className="stat-value">{account.following || 0}</span>
-                      <span className="stat-label">following</span>
+                      <div className="stat-value">{account.following || 0}</div>
+                      <div className="stat-label">following</div>
                     </div>
                   </div>
                 </div>

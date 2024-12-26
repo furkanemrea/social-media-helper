@@ -1,0 +1,145 @@
+.highlight-items-container {
+  padding: 16px;
+}
+
+.highlight-items-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.highlight-list-item {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.highlight-list-item:hover {
+  transform: scale(0.98);
+}
+
+.highlight-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  color: white;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.video-placeholder,
+.image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal styles */
+.highlight-modal {
+  position: fixed !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+}
+
+.highlight-modal .ant-modal-content {
+  background-color: rgba(0, 0, 0, 0.95);
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-modal .ant-modal-body {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-media {
+  max-height: 90vh;
+  max-width: 90vw;
+  object-fit: contain;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: fixed !important;
+  width: 100% !important;
+  touch-action: none !important;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .modal-media {
+    max-height: 100vh;
+    max-width: 100vw;
+    width: 100%;
+    height: auto;
+  }
+
+  .highlight-modal .ant-modal-close {
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+  }
+
+  .highlight-modal .ant-modal-close-x {
+    color: white;
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+/* Make items bigger */
+@media (min-width: 768px) {
+  .highlight-items-container .ant-row {
+    margin: -12px;
+  }
+  
+  .highlight-items-container .ant-col {
+    padding: 12px;
+  }
+} 

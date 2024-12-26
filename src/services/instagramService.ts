@@ -181,7 +181,7 @@ export const getInstagramHighlightStories = async (highlightId: string) => {
 export const getHighlightInfo = async (highlightId: string) => {
   try {
     const response = await fetch(
-      `https://instagram-scraper-api2.p.rapidapi.com/v1/highlight_info?highlight_id=${highlightId}`,
+      `https://instagram-scraper-api2.p.rapidapi.com/v1/highlight_info?highlight_id=${highlightId.split(':')[1]}`,
       {
         headers: {
           'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
@@ -194,9 +194,10 @@ export const getHighlightInfo = async (highlightId: string) => {
       throw new Error(`Failed to fetch highlight info: ${response.statusText}`);
     }
 
-    return await response.json();
+    const resp = await response.json();
+    console.log({resp})
+    return resp;
   } catch (error) {
     console.error('Error fetching highlight info:', error);
-    throw error;
   }
 }; 

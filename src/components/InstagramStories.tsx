@@ -124,6 +124,7 @@ const InstagramStories: React.FC<{ username: string }> = ({ username }) => {
       <Modal
         open={selectedStory !== null}
         onCancel={handleModalClose}
+        onClose={handleModalClose}
         footer={null}
         width="80%"
         centered

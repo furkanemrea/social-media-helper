@@ -1,61 +1,65 @@
 .highlights-container {
   padding: 16px;
-  border-bottom: 1px solid #dbdbdb;
-  background-color: white;
 }
 
 .highlights-loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100px;
-}
-
-.highlights-row {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  padding: 8px 0;
-}
-
-.highlights-row::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  min-height: 200px;
 }
 
 .highlight-item {
+  cursor: pointer;
+  text-align: center;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80px;
-  cursor: pointer;
 }
 
-.highlight-circle {
-  width: 64px;
-  height: 64px;
+.highlight-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.highlight-item.selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.highlight-cover-wrapper {
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   padding: 2px;
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .highlight-cover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 2px solid white;
   object-fit: cover;
+  border: 2px solid white;
+  background-color: white;
 }
 
 .highlight-title {
-  font-size: 12px;
+  font-size: 11px;
   color: #262626;
-  text-align: center;
-  max-width: 74px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 100%;
+  padding: 0 4px;
+}
+
+.highlight-items-section {
+  margin-top: 16px;
+  border-top: 1px solid #dbdbdb;
+  padding-top: 16px;
 }
 
 .highlight-story-modal {

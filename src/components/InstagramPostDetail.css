@@ -1,20 +1,57 @@
 .post-detail-modal {
+  position: fixed !important;
   padding: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 1000 !important;
 }
 
 .post-detail-modal .ant-modal-content {
   height: 90vh;
   padding: 0;
   overflow: hidden;
+  width: 90vw !important;
+  max-width: 1200px !important;
+  margin: auto !important;
+  position: relative !important;
+}
+
+.post-detail-modal .ant-modal-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+}
+
+.post-detail-modal .ant-modal {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 90vw !important;
+  max-width: 1200px !important;
+  position: absolute !important;
 }
 
 .post-detail-modal .ant-modal-close {
   color: white;
+  z-index: 1001;
 }
 
 .post-detail-container {
   display: flex;
   height: 100%;
+  width: 100%;
 }
 
 .post-detail-media {
@@ -70,6 +107,78 @@
   height: 100%;
 }
 
+/* Mobile styles */
+@media (max-width: 768px) {
+  .post-detail-modal {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+
+  .post-detail-modal .ant-modal {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  .post-detail-modal .ant-modal-content {
+    height: 100vh;
+    width: 100vw !important;
+    border-radius: 0;
+    margin: 0 !important;
+  }
+
+  .post-detail-container {
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .post-detail-media {
+    flex: none;
+    height: 50vh;
+  }
+
+  .carousel-item {
+    height: 50vh;
+  }
+
+  .carousel-item img,
+  .carousel-item video {
+    max-height: 50vh;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .post-detail-info {
+    flex: 1;
+    height: auto;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .post-detail-modal .ant-modal-close {
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .post-detail-modal .ant-modal-close-x {
+    color: white;
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+/* Rest of your existing styles */
 .post-detail-header {
   display: flex;
   align-items: center;
