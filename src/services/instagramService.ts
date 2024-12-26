@@ -2,7 +2,7 @@ import axios from 'axios';
 import { InstagramAccount, InstagramAccountResponse, InstagramPostsResponse } from '../types/instagram.types';
 
 const INSTAGRAM_API_URL = 'https://instagram-scraper-api2.p.rapidapi.com/v1.2';
-const RAPID_API_KEY = '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a';
+const RAPID_API_KEY = 'a0164d8ebcmsh8f1b628ba11d0d0p1b4f5bjsn0029879f66db';
 const RAPID_API_HOST = 'instagram-scraper-api2.p.rapidapi.com';
 
 const api = axios.create({
@@ -117,7 +117,7 @@ export const getInstagramStories = async (username: string) => {
       method: 'GET',
       headers: {
         'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
-        'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a',
+        'x-rapidapi-key': 'a0164d8ebcmsh8f1b628ba11d0d0p1b4f5bjsn0029879f66db',
       },
     });
     console.log({response});
@@ -139,7 +139,7 @@ export const getInstagramHighlights = async (username: string) => {
       {
         headers: {
           'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
-          'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a'
+          'x-rapidapi-key': 'a0164d8ebcmsh8f1b628ba11d0d0p1b4f5bjsn0029879f66db'
         }
       }
     );
@@ -162,7 +162,7 @@ export const getInstagramHighlightStories = async (highlightId: string) => {
       {
         headers: {
           'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
-          'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a'
+          'x-rapidapi-key': 'a0164d8ebcmsh8f1b628ba11d0d0p1b4f5bjsn0029879f66db'
         }
       }
     );
@@ -185,7 +185,7 @@ export const getHighlightInfo = async (highlightId: string) => {
       {
         headers: {
           'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
-          'x-rapidapi-key': '73294bfdc7msh5d4adbfbeb54c78p1e09f9jsn473ddfb8e91a'
+          'x-rapidapi-key': 'a0164d8ebcmsh8f1b628ba11d0d0p1b4f5bjsn0029879f66db'
         }
       }
     );
